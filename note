@@ -1,0 +1,45 @@
+1. Chuc nang thay doi icon status - groupACP - checkall
+
+// $xhtml    = '<a class="jgrid" id="status-' . $id . '" href="javascript:changeStatus(\'' . $link . '\');">
+//                         <span class="state ' . $strStatus . '"></span>
+//                     </a>';
+trong phần Helper
+(\'' . $link . '\') : vì trong ngoặc phải là một chuỗi nên dùng cách (\' ... \') để thêm 2 dấu nháy đơn vào cho chuỗi
+
+Để thay đổi icon status mà ko cần load lại page ta sẽ thay đổi ở id="status-' . $id . '; href="javascript:changeStatus(\'' . $link . '\')
+' . $strStatus . '
+=> dùng kĩ thuật ajax (trước đó biến 1 mảng thành chuỗi bằng json_endcode và một chuỗi thành 1 đối tượng để sử dụng trong custom)
+
+<check-all></check-all>
+<!-- $(document).ready(function() {
+    $('input[name=checkall-toggle]') . change(function() {
+        var checkStatus = this.checked;
+        $('#adminForm') . find(':checkbox') . each(function() {
+            this.checked = checkStatus;
+        });
+    });
+}) --> jquery truy cap vao input voi gia tri name=checkall-toggle va su kien thay doi gia tri nen no se la change
+--> khai bao bien checkStatus = this la toan bo noi dung cua input[name=checkall-toggle] va xem no co check hay khong la checked
+Sau khi chung ta lay duoc gia tri nay roi thi chung ta se duyet qua tat ca cac phan tu checkbox co trong form do (form dang thao tac la adminForm)
+--> jquery truy cap vao id adminForm tim kiem tat ca cac checkbox, sau khi tim kiem duoc roi thi se duyet qua, o day tiep tuc dung this nhung
+this o day dong vai tro la cac checkbox duoc tim thay. this goi den checked = checkStatus
+
+Sau nay trong application se con nhieu folder nua nen ta se tao rieng folder module
+
+2. Chuc nang click button new - publish - unpublish
+
+Chi can thay doi action cua phan form hien tai
+
+3. Kĩ thuật sử lý nút bấm phần Form: Đê kiểm tra xem đã bấm hay chưa ta kiểm tra mảng form phần tử token > 0 => chứng tỏ đã bấm
+
+/------------------ACTIVE EMAIL-------------------------/
+public function saveItem($arrParam, $option = null)
+{
+    $arrParam['form']['active_code']         = time();
+}
+
+link = index.php?module=default&controller=user&action=active
+    Param: userId,
+           activecode
+
+So sanh: link so sanh database <=> update status = 1, activecode = 1 (xem huong dan o phan register-menu)

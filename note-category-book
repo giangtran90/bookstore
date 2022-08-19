@@ -1,0 +1,14 @@
+Chức năng categoy chúng ta có thể bổ sung các tính năng như tìm kiếm, phân trang...
+những phần này đã được học nên muốn phát triển có thể triển khai thêm.
+
+Chức năng book có thể tham khảo chương 6 fckEditor để làm về mục hiện thị văn bản cho tốt
+
+Tối ưu hóa link động
+Văn Học - Tiểu Thuyết  -> van-hoc-tieu-thuyet 
+B1: Loại bỏ khoảng trắng, loại bỏ các kí tự - trùng nhau
+B2: Loại bỏ các kí tự có dấu và chuyển thành chữ thường
+        van-hoc-tieu-thuyet-1.html          index.php?module=default&controller=book&action=list&category_id=1
+=> ([A-Za-z0-9_-]+)-([0-9]+)\.html          index.php?module=default&controller=book&action=list&category_id=$2
+Ý nghĩa: van-hoc-tieu-thuyet = ([A-Za-z0-9_-]+) = $1
+            1                = ([0-9]+)         = $2
+            dấu . là kí tự đặc biệt nên phải có \ phía trước
